@@ -3,18 +3,188 @@
   "source_context": [
     "研发资助",
     "里程碑",
-    "证据拨付"
+    "证据拨付",
+    "高风险容错",
+    "职责分离"
   ],
+  "glossary": {
+    "阶段承诺": "把研究目标、验收指标、技术证据要求与预算科目绑定成可协商的里程碑；协商一致前不可拨款",
+    "证据包": "支持某里程碑承诺的全部技术证据（含失败记录），按证据要求逐项齐备方为完整",
+    "失败记录": "试验失败的结构化留痕（假设、现象、数据、结论），是有效证据而非否定项目的理由",
+    "外部评审": "独立技术专家对证据/失败/路线变更的书面意见，含结论与继续资助建议",
+    "证据快照": "付款审批时点冻结的证据清单哈希；日后证据被更正，付款仍可追溯到当时批准的版本",
+    "职责分离": "提交证据者、技术核验者、付款批准者、执行付款者必须为互不相同的自然人",
+    "处置义务": "项目暂停后对已购设备与未用资金仍负有的保管/封存/退回/核销义务，不因暂停而免除"
+  },
   "event_contract": {
     "event_id": "全局唯一字符串",
     "occurred_at": "带时区时间",
-    "entity_id": "领域实体标识",
-    "version": "正整数",
-    "payload": "业务对象"
+    "entity_id": "领域实体标识（项目/里程碑/证据/评审/付款）",
+    "version": "正整数（同一实体严格递增）",
+    "actor_id": "命令发起人的身份标识（可审计，不向无权限角色返回）",
+    "payload": "业务对象，必须含 type 字段，取值见 event_catalog"
+  },
+  "roles": {
+    "applicant": "项目承担方：登记项目、编制预算、提交证据、提出变更与验收申请",
+    "technical_reviewer": "技术核验人：核验证据是否满足承诺的证据要求，不能提交证据、不能碰付款",
+    "external_expert": "外部评审专家：出具独立评审意见（失败鉴定/路线变更/验收）",
+    "approver": "付款批准人：证据完整且职责分离满足时批准付款，不能执行付款",
+    "finance": "出纳/财务：凭已批准付款单向供应商付款，不能批准",
+    "funder": "资助机构：暂停/恢复/终止项目，确认处置义务履行",
+    "auditor": "审计：只读，可查看身份字段与全部历史版本"
+  },
+  "separation_of_duties": [
+    "evidence_submitter != technical_reviewer != payment_approver != finance_executor",
+    "付款批准人不得是该里程碑任一证据的提交人或核验人",
+    "外部评审专家不得来自承担方，且不得兼任付款批准人"
+  ],
+  "event_catalog": {
+    "ProjectRegistered": {
+      "entity": "project",
+      "summary": "登记研究目标与承担方",
+      "payload_fields": ["project_code", "title", "research_goal", "applicant_id", "applicant_name", "total_budget", "currency", "ip_ownership"]
+    },
+    "BudgetEstablished": {
+      "entity": "project",
+      "summary": "编制预算科目（可多次重估，旧版本保留）",
+      "payload_fields": ["budget_version", "items[item_id,name,category,amount,evidence_tied]", "basis", "supersedes_version"]
+    },
+    "MilestoneProposed": {
+      "entity": "milestone",
+      "summary": "提出阶段承诺（目标/指标/证据要求/金额/预算科目）",
+      "payload_fields": ["milestone_id", "project_code", "stage_index", "name", "objective", "acceptance_metrics", "evidence_requirements[code,name,kind,required]", "linked_budget_items", "amount", "due_date", "route", "ip_ownership"]
+    },
+    "MilestoneNegotiated": {
+      "entity": "milestone",
+      "summary": "协商修订阶段承诺（形成新版本，可协商）",
+      "payload_fields": ["milestone_id", "revision", "changes", "negotiated_by[actor_id,role]"]
+    },
+    "MilestoneCommitted": {
+      "entity": "milestone",
+      "summary": "双方承诺生效；此后变更须走变更流程",
+      "payload_fields": ["milestone_id", "revision", "committed_by"]
+    },
+    "EvidenceSubmitted": {
+      "entity": "evidence",
+      "summary": "提交技术证据（kind=test_result 时须含通过/失败）",
+      "payload_fields": ["evidence_id", "milestone_id", "requirement_code", "kind", "title", "result", "data_ref", "ip_ownership", "submitter_id", "submitted_for_revision"]
+    },
+    "TrialFailed": {
+      "entity": "evidence",
+      "summary": "结构化记录试验失败，价值予以保留",
+      "payload_fields": ["evidence_id", "milestone_id", "trial_name", "hypothesis", "observed", "data_ref", "root_cause", "learned_value", "submitter_id"]
+    },
+    "EvidenceCorrected": {
+      "entity": "evidence",
+      "summary": "更正证据：不覆盖原始事实，原件标记 superseded 并保留",
+      "payload_fields": ["evidence_id", "corrects_evidence_id", "reason", "new_data_ref", "submitter_id"]
+    },
+    "EvidenceVerified": {
+      "entity": "evidence",
+      "summary": "技术核验人逐条核验",
+      "payload_fields": ["evidence_id", "milestone_id", "accepted", "review_note", "reviewer_id"]
+    },
+    "ExternalReviewRecorded": {
+      "entity": "review",
+      "summary": "登记外部独立评审意见",
+      "payload_fields": ["review_id", "milestone_id", "scope", "verdict", "recommendation", "expert_id", "expert_org", "data_ref"]
+    },
+    "RouteSwitchRequested": {
+      "entity": "change_request",
+      "summary": "申请切换技术路线（保留失败价值，触发预算重估）",
+      "payload_fields": ["change_id", "project_code", "milestone_id", "from_route", "to_route", "reason", "failure_evidence_ids", "requested_by"]
+    },
+    "RouteSwitchApproved": {
+      "entity": "change_request",
+      "summary": "外部评审+资助机构批准路线切换，并给出重估预算依据",
+      "payload_fields": ["change_id", "review_id", "approved_by", "new_milestone_revision", "new_requirements", "new_amount", "new_linked_budget_items", "budget_reestimate[item_id,old_amount,new_amount,reason]", "conditions"]
+    },
+    "MilestoneSuspended": {
+      "entity": "milestone",
+      "summary": "里程碑/项目暂停，同步登记处置义务",
+      "payload_fields": ["scope", "reason", "suspended_by", "disposal_obligations[asset_or_fund,type,action,deadline,responsible_id]"]
+    },
+    "MilestoneResumed": {
+      "entity": "milestone",
+      "summary": "暂停恢复",
+      "payload_fields": ["scope", "reason", "resumed_by"]
+    },
+    "ProjectTerminated": {
+      "entity": "project",
+      "summary": "终止项目；未决处置义务仍然有效",
+      "payload_fields": ["reason", "terminated_by"]
+    },
+    "DisposalObligationFulfilled": {
+      "entity": "project",
+      "summary": "履行一项设备/未用资金处置义务并留证",
+      "payload_fields": ["obligation_ref", "asset_or_fund", "action_taken", "proof_ref", "fulfilled_by"]
+    },
+    "PaymentApproved": {
+      "entity": "payment",
+      "summary": "双闸门通过后批准付款，冻结当时证据快照",
+      "payload_fields": ["payment_id", "milestone_id", "amount", "currency", "linked_budget_items", "approved_by", "evidence_snapshot[snapshot_id,requirement_code,evidence_id,version,sha256]", "gate_result"]
+    },
+    "PaymentExecuted": {
+      "entity": "payment",
+      "summary": "财务按已批准付款单付款；资金对应批准时点的证据快照",
+      "payload_fields": ["payment_id", "amount", "currency", "executed_by", "payee", "voucher_ref", "executed_at"]
+    },
+    "AcceptanceRequested": {
+      "entity": "milestone",
+      "summary": "申请验收（可经历路线变更）",
+      "payload_fields": ["milestone_id", "claimed_metrics", "requested_by"]
+    },
+    "AcceptanceApproved": {
+      "entity": "milestone",
+      "summary": "按最终承诺指标验收达标",
+      "payload_fields": ["milestone_id", "final_metrics", "review_id", "approved_by"]
+    }
+  },
+  "milestone_states": [
+    "proposed",
+    "committed",
+    "in_progress",
+    "suspended",
+    "completed",
+    "accepted",
+    "terminated"
+  ],
+  "evidence_kinds": ["test_result", "simulation", "design_doc", "inspection", "patent", "paper", "certificate", "failure_log"],
+  "disposal_actions": ["保管封存", "退回资助方", "调剂使用", "继续封存", "资金退回", "资金核销"],
+  "payment_gates": {
+    "gate_evidence_complete": "证据包满足当前生效承诺版本的全部 required 证据要求；证据均已核验 accepted；更正链指向当前版本",
+    "gate_separation_of_duties": "提交人、核验人、批准人、执行人四角色互不相同；批准人未参与该里程碑证据的提交或核验",
+    "gate_state": "里程碑处于 committed/in_progress 且未暂停/终止；付款不得重复",
+    "gate_budget": "付款金额与科目对应当前预算版本，累计付款不超过重估后该里程碑金额"
+  },
+  "ip_rules": {
+    "foreground_ip": "项目产生的专利/软著等前景知识产权归属在项目登记与里程碑承诺中约定；里程碑证据 kind=patent/paper 记录权属",
+    "ip_field": "evidence payload 与承诺中记录 ip_ownership（承担方/资助方/共有）及共有比例",
+    "switch_rule": "路线切换前已形成的知识产权归属不因路线变更而改变，在 RouteSwitchApproved.conditions 中列明"
+  },
+  "sensitive_fields": {
+    "actor_id": ["auditor", "funder"],
+    "submitter_id": ["auditor", "funder", "technical_reviewer"],
+    "reviewer_id": ["auditor", "funder"],
+    "expert_id": ["auditor", "funder", "technical_reviewer"],
+    "approved_by": ["auditor", "funder"],
+    "executed_by": ["auditor", "funder"],
+    "payee": ["auditor", "funder", "finance", "approver"],
+    "voucher_ref": ["auditor", "funder", "finance"],
+    "data_ref": ["auditor", "funder", "technical_reviewer"]
   },
   "invariants": [
-    "同一事件只能生效一次",
-    "更正不得覆盖原始事实",
+    "同一事件只能生效一次（event_id 全局唯一，重复追加被拒绝）",
+    "同一实体 version 严格递增且连续，并发追加按版本冲突拒绝",
+    "更正不得覆盖原始事实（EvidenceCorrected 追加新事件，原件保留并标记 superseded）",
+    "occurred_at 必须为带时区时间，事件一经追加不可变；状态只能由事件流重放得到",
+    "证据不完整不得批准付款；职责不分离不得批准付款；付款单未经批准不得执行",
+    "试验失败必须以 TrialFailed 留痕并计入证据包，不得因单次失败终止或删除其价值",
+    "技术路线切换必须有失败证据、外部评审与预算重估，切换后里程碑产生新承诺版本",
+    "每笔付款必须冻结批准时点的证据快照，历史付款不随后续证据更正而改变",
+    "项目暂停/终止后设备与未用资金处置义务持续有效，履行须留证",
+    "验收只按里程碑当前生效承诺版本的指标判定，且须有对应外部评审",
     "权限不足时不得返回敏感字段"
-  ]
+  ],
+  "acceptance_selection_rule": "在已 AcceptanceApproved 的项目中，选取存在 RouteSwitchApproved（中途切换技术路线）且最终指标达标的项目作为验收示范；其失败证据保留、预算按重估版本重算、每笔付款可回溯至对应承诺版本的证据快照"
 }

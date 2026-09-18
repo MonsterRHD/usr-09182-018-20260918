@@ -1,11 +1,1064 @@
 [
   {
-    "event_id": "09182-018-E1",
-    "occurred_at": "2026-09-18T08:00:00+08:00",
-    "entity_id": "entity-018",
+    "event_id": "ROBO-2026-007-E1",
+    "occurred_at": "2026-01-08T09:00:00+08:00",
+    "entity_id": "ROBO-2026-007",
     "version": 1,
+    "actor_id": "A-zhang",
     "payload": {
-      "state": "已登记"
+      "type": "ProjectRegistered",
+      "project_code": "ROBO-2026-007",
+      "title": "机器人高精度谐波减速器工程化",
+      "research_goal": "研制疲劳寿命≥10000h、传动误差≤1弧分的机器人谐波减速器",
+      "applicant_id": "A-zhang",
+      "applicant_name": "启辰机器人有限公司",
+      "total_budget": 3600000,
+      "currency": "CNY",
+      "ip_ownership": "前景知识产权由承担方所有，资助方享有免费实施许可"
+    }
+  },
+  {
+    "event_id": "ROBO-2026-007-E2",
+    "occurred_at": "2026-01-08T09:30:00+08:00",
+    "entity_id": "ROBO-2026-007",
+    "version": 2,
+    "actor_id": "A-zhang",
+    "payload": {
+      "type": "BudgetEstablished",
+      "budget_version": 1,
+      "items": [
+        {
+          "item_id": "B-EQ",
+          "name": "加工与检测设备购置费",
+          "category": "设备费",
+          "amount": 1500000
+        },
+        {
+          "item_id": "B-MAT",
+          "name": "样机材料费",
+          "category": "材料费",
+          "amount": 800000
+        },
+        {
+          "item_id": "B-TEST",
+          "name": "测试化验加工费",
+          "category": "测试费",
+          "amount": 700000
+        },
+        {
+          "item_id": "B-IP",
+          "name": "知识产权事务费",
+          "category": "知识产权费",
+          "amount": 400000
+        },
+        {
+          "item_id": "B-COOP",
+          "name": "外部协作与评审费",
+          "category": "协作费",
+          "amount": 200000
+        }
+      ],
+      "basis": "立项预算评审意见（预算版本1）",
+      "supersedes_version": null
+    }
+  },
+  {
+    "event_id": "MS-1-E1",
+    "occurred_at": "2026-01-10T10:00:00+08:00",
+    "entity_id": "MS-1",
+    "version": 1,
+    "actor_id": "A-zhang",
+    "payload": {
+      "type": "MilestoneProposed",
+      "milestone_id": "MS-1",
+      "project_code": "ROBO-2026-007",
+      "stage_index": 1,
+      "name": "方案设计与仿真验证",
+      "objective": "冻结减速器总体方案，仿真证明新齿形具备长寿命潜力",
+      "acceptance_metrics": [
+        {
+          "name": "仿真疲劳寿命_万次",
+          "operator": ">=",
+          "target": 10000
+        }
+      ],
+      "evidence_requirements": [
+        {
+          "code": "R1",
+          "name": "设计方案与仿真报告",
+          "kind": "simulation",
+          "required": true
+        }
+      ],
+      "linked_budget_items": [
+        "B-TEST",
+        "B-COOP"
+      ],
+      "amount": 500000,
+      "due_date": "2026-03-31",
+      "route": "初始路线",
+      "ip_ownership": "前景知识产权由承担方所有，资助方享有免费实施许可"
+    }
+  },
+  {
+    "event_id": "MS-1-E2",
+    "occurred_at": "2026-01-15T14:00:00+08:00",
+    "entity_id": "MS-1",
+    "version": 2,
+    "actor_id": "F-zhao",
+    "payload": {
+      "type": "MilestoneCommitted",
+      "milestone_id": "MS-1",
+      "revision": 1,
+      "committed_by": [
+        "F-zhao",
+        "funder"
+      ]
+    }
+  },
+  {
+    "event_id": "EV-SIM-1-E1",
+    "occurred_at": "2026-03-05T11:00:00+08:00",
+    "entity_id": "EV-SIM-1",
+    "version": 1,
+    "actor_id": "A-zhang",
+    "payload": {
+      "type": "EvidenceSubmitted",
+      "evidence_id": "EV-SIM-1",
+      "milestone_id": "MS-1",
+      "requirement_code": "R1",
+      "kind": "simulation",
+      "title": "谐波啮合仿真报告（初版）",
+      "result": "仿真疲劳寿命 12500 万次，满足指标",
+      "data_ref": "s3://rd/robo007/sim-report-v1.pdf",
+      "ip_ownership": "前景知识产权由承担方所有，资助方享有免费实施许可",
+      "submitter_id": "A-zhang",
+      "submitted_for_revision": 1
+    }
+  },
+  {
+    "event_id": "EV-SIM-1-E2",
+    "occurred_at": "2026-03-09T15:00:00+08:00",
+    "entity_id": "EV-SIM-1",
+    "version": 2,
+    "actor_id": "T-li",
+    "payload": {
+      "type": "EvidenceVerified",
+      "evidence_id": "EV-SIM-1",
+      "milestone_id": "MS-1",
+      "accepted": true,
+      "review_note": "模型边界条件与台架工况一致，复核通过",
+      "reviewer_id": "T-li"
+    }
+  },
+  {
+    "event_id": "PAY-2026-001-E1",
+    "occurred_at": "2026-03-12T09:30:00+08:00",
+    "entity_id": "PAY-2026-001",
+    "version": 1,
+    "actor_id": "AP-qian",
+    "payload": {
+      "type": "PaymentApproved",
+      "payment_id": "PAY-2026-001",
+      "milestone_id": "MS-1",
+      "amount": 500000,
+      "currency": "CNY",
+      "linked_budget_items": [
+        "B-TEST",
+        "B-COOP"
+      ],
+      "approved_by": "AP-qian",
+      "evidence_snapshot": {
+        "snapshot_id": "0c7d3b35146d7b8c",
+        "commit_revision": 1,
+        "route": "初始路线",
+        "entries": [
+          {
+            "requirement_code": "R1",
+            "evidence_id": "EV-SIM-1",
+            "version": 1,
+            "sha256": "073907fb02035d25c420581bba66cc23c5a6af438ceb6ae71311c3e9bd7ad547"
+          }
+        ]
+      },
+      "gate_result": {
+        "passed": true,
+        "gates": [
+          {
+            "code": "gate_evidence_complete",
+            "passed": true,
+            "detail": {
+              "missing": [],
+              "unverified": [],
+              "rejected": [],
+              "matched_evidence_ids": [
+                "EV-SIM-1"
+              ]
+            }
+          },
+          {
+            "code": "gate_separation_of_duties",
+            "passed": true,
+            "detail": {
+              "problems": []
+            }
+          },
+          {
+            "code": "gate_state",
+            "passed": true,
+            "detail": {
+              "problems": [],
+              "status": "committed"
+            }
+          },
+          {
+            "code": "gate_budget",
+            "passed": true,
+            "detail": {
+              "problems": [],
+              "committed_amount": 500000.0,
+              "already_paid": 0,
+              "remaining": 500000.0
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "event_id": "PAY-2026-001-E2",
+    "occurred_at": "2026-03-13T10:00:00+08:00",
+    "entity_id": "PAY-2026-001",
+    "version": 2,
+    "actor_id": "FN-sun",
+    "payload": {
+      "type": "PaymentExecuted",
+      "payment_id": "PAY-2026-001",
+      "amount": 500000,
+      "currency": "CNY",
+      "executed_by": "FN-sun",
+      "payee": "启辰机器人有限公司",
+      "voucher_ref": "银付字第2026031208号",
+      "executed_at": "2026-03-13T10:00:00+08:00"
+    }
+  },
+  {
+    "event_id": "MS-2-E1",
+    "occurred_at": "2026-01-10T10:20:00+08:00",
+    "entity_id": "MS-2",
+    "version": 1,
+    "actor_id": "A-zhang",
+    "payload": {
+      "type": "MilestoneProposed",
+      "milestone_id": "MS-2",
+      "project_code": "ROBO-2026-007",
+      "stage_index": 2,
+      "name": "减速器工程样机与台架达标",
+      "objective": "交付工程样机并通过疲劳、精度、效率三项台架考核",
+      "acceptance_metrics": [
+        {
+          "name": "疲劳寿命_h",
+          "operator": ">=",
+          "target": 10000
+        },
+        {
+          "name": "传动误差_arcmin",
+          "operator": "<=",
+          "target": 1.0
+        },
+        {
+          "name": "传动效率",
+          "operator": ">=",
+          "target": 0.85
+        }
+      ],
+      "evidence_requirements": [
+        {
+          "code": "R1",
+          "name": "疲劳台架试验报告",
+          "kind": "test_result",
+          "required": true
+        },
+        {
+          "code": "R2",
+          "name": "传动精度检测报告",
+          "kind": "inspection",
+          "required": true
+        },
+        {
+          "code": "R3",
+          "name": "核心结构专利受理",
+          "kind": "patent",
+          "required": true
+        }
+      ],
+      "linked_budget_items": [
+        "B-EQ",
+        "B-MAT"
+      ],
+      "amount": 2100000,
+      "due_date": "2026-08-31",
+      "route": "合金钢柔轮+传统热处理",
+      "ip_ownership": "前景知识产权由承担方所有，资助方享有免费实施许可"
+    }
+  },
+  {
+    "event_id": "MS-2-E2",
+    "occurred_at": "2026-01-14T09:00:00+08:00",
+    "entity_id": "MS-2",
+    "version": 2,
+    "actor_id": "F-zhao",
+    "payload": {
+      "type": "MilestoneNegotiated",
+      "milestone_id": "MS-2",
+      "revision": 2,
+      "changes": {
+        "amount": 2000000
+      },
+      "negotiated_by": [
+        {
+          "actor_id": "A-zhang",
+          "role": "applicant"
+        },
+        {
+          "actor_id": "F-zhao",
+          "role": "funder"
+        }
+      ]
+    }
+  },
+  {
+    "event_id": "MS-2-E3",
+    "occurred_at": "2026-01-15T14:10:00+08:00",
+    "entity_id": "MS-2",
+    "version": 3,
+    "actor_id": "F-zhao",
+    "payload": {
+      "type": "MilestoneCommitted",
+      "milestone_id": "MS-2",
+      "revision": 2,
+      "committed_by": [
+        "F-zhao",
+        "funder"
+      ]
+    }
+  },
+  {
+    "event_id": "EV-FAIL-1-E1",
+    "occurred_at": "2026-04-18T17:20:00+08:00",
+    "entity_id": "EV-FAIL-1",
+    "version": 1,
+    "actor_id": "A-zhang",
+    "payload": {
+      "type": "TrialFailed",
+      "evidence_id": "EV-FAIL-1",
+      "milestone_id": "MS-2",
+      "trial_name": "合金钢柔轮疲劳台架（第一轮）",
+      "hypothesis": "经传统热处理的合金钢柔轮可达到10000h疲劳寿命",
+      "observed": "6200h 时柔轮杯底出现贯穿性裂纹，台架中止",
+      "data_ref": "s3://rd/robo007/trial-fail-0612.pdf",
+      "root_cause": "热处理残余应力在齿根集中，诱发疲劳裂纹",
+      "learned_value": "排除了合金钢+传统热处理路线；残余应力分布数据为复合材料柔轮铺层设计提供直接依据",
+      "submitter_id": "A-zhang"
+    }
+  },
+  {
+    "event_id": "CHG-2026-002-E1",
+    "occurred_at": "2026-04-22T09:00:00+08:00",
+    "entity_id": "CHG-2026-002",
+    "version": 1,
+    "actor_id": "A-zhang",
+    "payload": {
+      "type": "RouteSwitchRequested",
+      "change_id": "CHG-2026-002",
+      "project_code": "ROBO-2026-007",
+      "milestone_id": "MS-2",
+      "from_route": "合金钢柔轮+传统热处理",
+      "to_route": "碳纤维复合材料柔轮+齿形修形",
+      "reason": "第一轮台架失败证明金属路线残余应力难题短期不可解；团队已有复合材料铺层工艺基础",
+      "failure_evidence_ids": [
+        "EV-FAIL-1"
+      ],
+      "requested_by": "A-zhang"
+    }
+  },
+  {
+    "event_id": "REV-2026-005-E1",
+    "occurred_at": "2026-05-06T13:30:00+08:00",
+    "entity_id": "REV-2026-005",
+    "version": 1,
+    "actor_id": "E-wang",
+    "payload": {
+      "type": "ExternalReviewRecorded",
+      "review_id": "REV-2026-005",
+      "milestone_id": "MS-2",
+      "scope": "route_switch",
+      "verdict": "通过：失败数据可信，同意切换至碳纤维复合材料柔轮路线",
+      "recommendation": "新路线须补做3批复合材料疲劳试验；原金属路线知识产权归属不变",
+      "expert_id": "E-wang",
+      "expert_org": "中科院宁波材料所",
+      "data_ref": "s3://review/2026/005-route-review.pdf"
+    }
+  },
+  {
+    "event_id": "CHG-2026-002-E2",
+    "occurred_at": "2026-05-12T10:00:00+08:00",
+    "entity_id": "CHG-2026-002",
+    "version": 2,
+    "actor_id": "F-zhao",
+    "payload": {
+      "type": "RouteSwitchApproved",
+      "change_id": "CHG-2026-002",
+      "review_id": "REV-2026-005",
+      "approved_by": "F-zhao",
+      "new_milestone_revision": 3,
+      "new_requirements": [
+        {
+          "code": "R1",
+          "name": "复合材料柔轮疲劳台架报告",
+          "kind": "test_result",
+          "required": true
+        },
+        {
+          "code": "R2",
+          "name": "传动精度检测报告",
+          "kind": "inspection",
+          "required": true
+        },
+        {
+          "code": "R3",
+          "name": "复合材料柔轮专利受理",
+          "kind": "patent",
+          "required": true
+        },
+        {
+          "code": "R4",
+          "name": "失败分析与路线对比报告",
+          "kind": "failure_log",
+          "required": true
+        }
+      ],
+      "new_amount": 1700000,
+      "new_linked_budget_items": [
+        "B-EQ",
+        "B-MAT",
+        "B-TEST"
+      ],
+      "budget_reestimate": [
+        {
+          "item_id": "B-MAT",
+          "old_amount": 800000,
+          "new_amount": 650000,
+          "reason": "复合材料近净成形，机加材料损耗下降"
+        },
+        {
+          "item_id": "B-TEST",
+          "old_amount": 700000,
+          "new_amount": 950000,
+          "reason": "新增3批复合材料疲劳试验与第三方见证"
+        }
+      ],
+      "conditions": [
+        "切换后首批疲劳试验须第三方见证",
+        "里程碑尾款与验收结论挂钩",
+        "切换前知识产权归属不变：前景知识产权由承担方所有，资助方享有免费实施许可"
+      ]
+    }
+  },
+  {
+    "event_id": "CHG-2026-002-BUDGET",
+    "occurred_at": "2026-05-12T10:00:00+08:00",
+    "entity_id": "ROBO-2026-007",
+    "version": 3,
+    "actor_id": "F-zhao",
+    "payload": {
+      "type": "BudgetEstablished",
+      "budget_version": 2,
+      "items": [
+        {
+          "item_id": "B-EQ",
+          "name": "加工与检测设备购置费",
+          "category": "设备费",
+          "amount": 1500000
+        },
+        {
+          "item_id": "B-MAT",
+          "name": "样机材料费（复合材料）",
+          "category": "材料费",
+          "amount": 650000
+        },
+        {
+          "item_id": "B-TEST",
+          "name": "测试化验加工费",
+          "category": "测试费",
+          "amount": 950000
+        },
+        {
+          "item_id": "B-IP",
+          "name": "知识产权事务费",
+          "category": "知识产权费",
+          "amount": 400000
+        },
+        {
+          "item_id": "B-COOP",
+          "name": "外部协作与评审费",
+          "category": "协作费",
+          "amount": 100000
+        }
+      ],
+      "basis": "路线切换 CHG-2026-002 后的预算重估",
+      "supersedes_version": 1
+    }
+  },
+  {
+    "event_id": "EV-FATIGUE-2-E1",
+    "occurred_at": "2026-07-15T16:00:00+08:00",
+    "entity_id": "EV-FATIGUE-2",
+    "version": 1,
+    "actor_id": "A-zhang",
+    "payload": {
+      "type": "EvidenceSubmitted",
+      "evidence_id": "EV-FATIGUE-2",
+      "milestone_id": "MS-2",
+      "requirement_code": "R1",
+      "kind": "test_result",
+      "title": "复合材料柔轮疲劳台架报告（第三方见证）",
+      "result": "三组试样平均寿命 12100h，通过",
+      "data_ref": "s3://rd/robo007/fatigue-v2.pdf",
+      "ip_ownership": "前景知识产权由承担方所有，资助方享有免费实施许可",
+      "submitter_id": "A-zhang",
+      "submitted_for_revision": 3
+    }
+  },
+  {
+    "event_id": "EV-FATIGUE-2-E2",
+    "occurred_at": "2026-07-19T10:00:00+08:00",
+    "entity_id": "EV-FATIGUE-2",
+    "version": 2,
+    "actor_id": "T-li",
+    "payload": {
+      "type": "EvidenceVerified",
+      "evidence_id": "EV-FATIGUE-2",
+      "milestone_id": "MS-2",
+      "accepted": true,
+      "review_note": "第三方见证签章齐全，原始曲线可追溯",
+      "reviewer_id": "T-li"
+    }
+  },
+  {
+    "event_id": "EV-PREC-2-E1",
+    "occurred_at": "2026-07-22T10:30:00+08:00",
+    "entity_id": "EV-PREC-2",
+    "version": 1,
+    "actor_id": "A-zhang",
+    "payload": {
+      "type": "EvidenceSubmitted",
+      "evidence_id": "EV-PREC-2",
+      "milestone_id": "MS-2",
+      "requirement_code": "R2",
+      "kind": "inspection",
+      "title": "传动精度检测报告",
+      "result": "传动误差 0.6 弧分，传动效率 91%，通过",
+      "data_ref": "s3://rd/robo007/precision-v2.pdf",
+      "ip_ownership": "前景知识产权由承担方所有，资助方享有免费实施许可",
+      "submitter_id": "A-zhang",
+      "submitted_for_revision": 3
+    }
+  },
+  {
+    "event_id": "EV-PREC-2-E2",
+    "occurred_at": "2026-07-26T14:00:00+08:00",
+    "entity_id": "EV-PREC-2",
+    "version": 2,
+    "actor_id": "T-li",
+    "payload": {
+      "type": "EvidenceVerified",
+      "evidence_id": "EV-PREC-2",
+      "milestone_id": "MS-2",
+      "accepted": true,
+      "review_note": "计量院复检数据一致",
+      "reviewer_id": "T-li"
+    }
+  },
+  {
+    "event_id": "EV-PAT-2-E1",
+    "occurred_at": "2026-08-02T09:00:00+08:00",
+    "entity_id": "EV-PAT-2",
+    "version": 1,
+    "actor_id": "A-zhang",
+    "payload": {
+      "type": "EvidenceSubmitted",
+      "evidence_id": "EV-PAT-2",
+      "milestone_id": "MS-2",
+      "requirement_code": "R3",
+      "kind": "patent",
+      "title": "发明专利《一种复合材料谐波柔轮结构》受理通知书",
+      "result": "已受理，申请号 CN202610xxxxxx.x",
+      "data_ref": "s3://rd/robo007/patent-accept.pdf",
+      "ip_ownership": "承担方所有，资助方享有免费实施许可（按项目约定）",
+      "submitter_id": "A-zhang",
+      "submitted_for_revision": 3
+    }
+  },
+  {
+    "event_id": "EV-PAT-2-E2",
+    "occurred_at": "2026-08-05T11:00:00+08:00",
+    "entity_id": "EV-PAT-2",
+    "version": 2,
+    "actor_id": "T-li",
+    "payload": {
+      "type": "EvidenceVerified",
+      "evidence_id": "EV-PAT-2",
+      "milestone_id": "MS-2",
+      "accepted": true,
+      "review_note": "专利权属与项目约定一致",
+      "reviewer_id": "T-li"
+    }
+  },
+  {
+    "event_id": "EV-FAIL-1-E2",
+    "occurred_at": "2026-08-06T09:30:00+08:00",
+    "entity_id": "EV-FAIL-1",
+    "version": 2,
+    "actor_id": "T-li",
+    "payload": {
+      "type": "EvidenceVerified",
+      "evidence_id": "EV-FAIL-1",
+      "milestone_id": "MS-2",
+      "accepted": true,
+      "review_note": "失败现象、数据与结论完整，作为路线决策依据有效",
+      "reviewer_id": "T-li"
+    }
+  },
+  {
+    "event_id": "PAY-2026-014-E1",
+    "occurred_at": "2026-08-10T09:00:00+08:00",
+    "entity_id": "PAY-2026-014",
+    "version": 1,
+    "actor_id": "AP-qian",
+    "payload": {
+      "type": "PaymentApproved",
+      "payment_id": "PAY-2026-014",
+      "milestone_id": "MS-2",
+      "amount": 1700000,
+      "currency": "CNY",
+      "linked_budget_items": [
+        "B-EQ",
+        "B-MAT",
+        "B-TEST"
+      ],
+      "approved_by": "AP-qian",
+      "evidence_snapshot": {
+        "snapshot_id": "d9f7400cc76324cd",
+        "commit_revision": 3,
+        "route": "碳纤维复合材料柔轮+齿形修形",
+        "entries": [
+          {
+            "requirement_code": "R1",
+            "evidence_id": "EV-FATIGUE-2",
+            "version": 1,
+            "sha256": "780a6289e591c543b143fd6c757837eef62f55e58a71c1b9c53ca48b2abdf23a"
+          },
+          {
+            "requirement_code": "R2",
+            "evidence_id": "EV-PREC-2",
+            "version": 1,
+            "sha256": "d7736f8d6b40a8689e10002679417607f0ad96f953a2ea7ec49fe38cc0405bf4"
+          },
+          {
+            "requirement_code": "R3",
+            "evidence_id": "EV-PAT-2",
+            "version": 1,
+            "sha256": "9a4764828cb93595c44d841ccca09d86c73d0a3045daf26131c69a4f7a472ec3"
+          },
+          {
+            "requirement_code": "R4",
+            "evidence_id": "EV-FAIL-1",
+            "version": 1,
+            "sha256": "0678c3ede43ddcc9a2fd699c1f8e78b2de71e8ea41794add7460aafa1cd6b484"
+          }
+        ]
+      },
+      "gate_result": {
+        "passed": true,
+        "gates": [
+          {
+            "code": "gate_evidence_complete",
+            "passed": true,
+            "detail": {
+              "missing": [],
+              "unverified": [],
+              "rejected": [],
+              "matched_evidence_ids": [
+                "EV-FATIGUE-2",
+                "EV-PREC-2",
+                "EV-PAT-2",
+                "EV-FAIL-1"
+              ]
+            }
+          },
+          {
+            "code": "gate_separation_of_duties",
+            "passed": true,
+            "detail": {
+              "problems": []
+            }
+          },
+          {
+            "code": "gate_state",
+            "passed": true,
+            "detail": {
+              "problems": [],
+              "status": "committed"
+            }
+          },
+          {
+            "code": "gate_budget",
+            "passed": true,
+            "detail": {
+              "problems": [],
+              "committed_amount": 1700000.0,
+              "already_paid": 0,
+              "remaining": 1700000.0
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "event_id": "PAY-2026-014-E2",
+    "occurred_at": "2026-08-11T10:30:00+08:00",
+    "entity_id": "PAY-2026-014",
+    "version": 2,
+    "actor_id": "FN-sun",
+    "payload": {
+      "type": "PaymentExecuted",
+      "payment_id": "PAY-2026-014",
+      "amount": 1700000,
+      "currency": "CNY",
+      "executed_by": "FN-sun",
+      "payee": "启辰机器人有限公司",
+      "voucher_ref": "银付字第2026081003号",
+      "executed_at": "2026-08-11T10:30:00+08:00"
+    }
+  },
+  {
+    "event_id": "EV-SIM-2-E1",
+    "occurred_at": "2026-08-18T14:00:00+08:00",
+    "entity_id": "EV-SIM-2",
+    "version": 1,
+    "actor_id": "A-zhang",
+    "payload": {
+      "type": "EvidenceCorrected",
+      "evidence_id": "EV-SIM-2",
+      "corrects_evidence_id": "EV-SIM-1",
+      "reason": "初版报告引用了旧网格的结果文件，更换为收敛网格数据",
+      "new_data_ref": "s3://rd/robo007/sim-report-v2.pdf",
+      "result": "仿真疲劳寿命 12180 万次，满足指标",
+      "submitter_id": "A-zhang"
+    }
+  },
+  {
+    "event_id": "EV-SIM-2-E2",
+    "occurred_at": "2026-08-20T10:00:00+08:00",
+    "entity_id": "EV-SIM-2",
+    "version": 2,
+    "actor_id": "T-li",
+    "payload": {
+      "type": "EvidenceVerified",
+      "evidence_id": "EV-SIM-2",
+      "milestone_id": "MS-1",
+      "accepted": true,
+      "review_note": "更正后数据复核通过；原件留存",
+      "reviewer_id": "T-li"
+    }
+  },
+  {
+    "event_id": "REV-2026-009-E1",
+    "occurred_at": "2026-08-22T09:00:00+08:00",
+    "entity_id": "REV-2026-009",
+    "version": 1,
+    "actor_id": "E-wang",
+    "payload": {
+      "type": "ExternalReviewRecorded",
+      "review_id": "REV-2026-009",
+      "milestone_id": "MS-1",
+      "scope": "acceptance",
+      "verdict": "通过验收：仿真指标达标，文档齐备",
+      "recommendation": "",
+      "expert_id": "E-wang",
+      "expert_org": "中科院宁波材料所",
+      "data_ref": null
+    }
+  },
+  {
+    "event_id": "MS-1-E3",
+    "occurred_at": "2026-08-23T09:00:00+08:00",
+    "entity_id": "MS-1",
+    "version": 3,
+    "actor_id": "A-zhang",
+    "payload": {
+      "type": "AcceptanceRequested",
+      "milestone_id": "MS-1",
+      "claimed_metrics": {
+        "仿真疲劳寿命_万次": 12180
+      },
+      "requested_by": "A-zhang"
+    }
+  },
+  {
+    "event_id": "MS-1-E4",
+    "occurred_at": "2026-08-26T10:00:00+08:00",
+    "entity_id": "MS-1",
+    "version": 4,
+    "actor_id": "F-zhao",
+    "payload": {
+      "type": "AcceptanceApproved",
+      "milestone_id": "MS-1",
+      "final_metrics": {
+        "仿真疲劳寿命_万次": 12180
+      },
+      "review_id": "REV-2026-009",
+      "approved_by": "F-zhao"
+    }
+  },
+  {
+    "event_id": "MS-2-E4",
+    "occurred_at": "2026-09-02T09:00:00+08:00",
+    "entity_id": "MS-2",
+    "version": 4,
+    "actor_id": "A-zhang",
+    "payload": {
+      "type": "AcceptanceRequested",
+      "milestone_id": "MS-2",
+      "claimed_metrics": {
+        "疲劳寿命_h": 12100,
+        "传动误差_arcmin": 0.6,
+        "传动效率": 0.91
+      },
+      "requested_by": "A-zhang"
+    }
+  },
+  {
+    "event_id": "REV-2026-012-E1",
+    "occurred_at": "2026-09-07T13:00:00+08:00",
+    "entity_id": "REV-2026-012",
+    "version": 1,
+    "actor_id": "E-wang",
+    "payload": {
+      "type": "ExternalReviewRecorded",
+      "review_id": "REV-2026-012",
+      "milestone_id": "MS-2",
+      "scope": "acceptance",
+      "verdict": "通过验收：新路线样机三项指标均达标，失败价值利用充分",
+      "recommendation": "建议将复合材料柔轮失败知识库纳入平台长期保留",
+      "expert_id": "E-wang",
+      "expert_org": "中科院宁波材料所",
+      "data_ref": "s3://review/2026/012-acceptance.pdf"
+    }
+  },
+  {
+    "event_id": "MS-2-E5",
+    "occurred_at": "2026-09-10T10:00:00+08:00",
+    "entity_id": "MS-2",
+    "version": 5,
+    "actor_id": "F-zhao",
+    "payload": {
+      "type": "AcceptanceApproved",
+      "milestone_id": "MS-2",
+      "final_metrics": {
+        "疲劳寿命_h": 12100,
+        "传动误差_arcmin": 0.6,
+        "传动效率": 0.91
+      },
+      "review_id": "REV-2026-012",
+      "approved_by": "F-zhao"
+    }
+  },
+  {
+    "event_id": "DRV-2026-011-E1",
+    "occurred_at": "2026-02-09T09:00:00+08:00",
+    "entity_id": "DRV-2026-011",
+    "version": 1,
+    "actor_id": "A-zhou",
+    "payload": {
+      "type": "ProjectRegistered",
+      "project_code": "DRV-2026-011",
+      "title": "高动态伺服驱动器研发",
+      "research_goal": "研制带宽2kHz以上的机器人关节伺服驱动器",
+      "applicant_id": "A-zhou",
+      "applicant_name": "云驱电控科技有限公司",
+      "total_budget": 1200000,
+      "currency": "CNY",
+      "ip_ownership": "承担方与资助方共有（承担方70%，资助方30%）"
+    }
+  },
+  {
+    "event_id": "DRV-2026-011-E2",
+    "occurred_at": "2026-02-09T09:20:00+08:00",
+    "entity_id": "DRV-2026-011",
+    "version": 2,
+    "actor_id": "A-zhou",
+    "payload": {
+      "type": "BudgetEstablished",
+      "budget_version": 1,
+      "items": [
+        {
+          "item_id": "B-DRV-EQ",
+          "name": "驱动测试平台",
+          "category": "设备费",
+          "amount": 600000
+        },
+        {
+          "item_id": "B-DRV-MAT",
+          "name": "样机物料",
+          "category": "材料费",
+          "amount": 300000
+        },
+        {
+          "item_id": "B-DRV-TEST",
+          "name": "测试费",
+          "category": "测试费",
+          "amount": 300000
+        }
+      ],
+      "basis": "立项预算（版本1）",
+      "supersedes_version": null
+    }
+  },
+  {
+    "event_id": "MS-D1-E1",
+    "occurred_at": "2026-02-12T10:00:00+08:00",
+    "entity_id": "MS-D1",
+    "version": 1,
+    "actor_id": "A-zhou",
+    "payload": {
+      "type": "MilestoneProposed",
+      "milestone_id": "MS-D1",
+      "project_code": "DRV-2026-011",
+      "stage_index": 1,
+      "name": "驱动器原理样机",
+      "objective": "完成原理样机设计与初步带载测试",
+      "acceptance_metrics": [
+        {
+          "name": "电流环带宽_kHz",
+          "operator": ">=",
+          "target": 2.0
+        }
+      ],
+      "evidence_requirements": [
+        {
+          "code": "R1",
+          "name": "带载测试报告",
+          "kind": "test_result",
+          "required": true
+        }
+      ],
+      "linked_budget_items": [
+        "B-DRV-EQ",
+        "B-DRV-MAT",
+        "B-DRV-TEST"
+      ],
+      "amount": 900000,
+      "due_date": "2026-09-30",
+      "route": "初始路线",
+      "ip_ownership": "承担方与资助方共有（承担方70%，资助方30%）"
+    }
+  },
+  {
+    "event_id": "MS-D1-E2",
+    "occurred_at": "2026-02-16T11:00:00+08:00",
+    "entity_id": "MS-D1",
+    "version": 2,
+    "actor_id": "F-zhao",
+    "payload": {
+      "type": "MilestoneCommitted",
+      "milestone_id": "MS-D1",
+      "revision": 1,
+      "committed_by": [
+        "F-zhao",
+        "funder"
+      ]
+    }
+  },
+  {
+    "event_id": "EV-DRV-T1-E1",
+    "occurred_at": "2026-06-18T15:00:00+08:00",
+    "entity_id": "EV-DRV-T1",
+    "version": 1,
+    "actor_id": "A-zhou",
+    "payload": {
+      "type": "EvidenceSubmitted",
+      "evidence_id": "EV-DRV-T1",
+      "milestone_id": "MS-D1",
+      "requirement_code": "R1",
+      "kind": "test_result",
+      "title": "原理样机初步带载测试",
+      "result": "电流环带宽 1.4kHz，未达标，迭代中",
+      "data_ref": "s3://rd/drv011/test-phase1.pdf",
+      "ip_ownership": "承担方与资助方共有（承担方70%，资助方30%）",
+      "submitter_id": "A-zhou",
+      "submitted_for_revision": 1
+    }
+  },
+  {
+    "event_id": "EV-DRV-T1-E2",
+    "occurred_at": "2026-06-24T10:00:00+08:00",
+    "entity_id": "EV-DRV-T1",
+    "version": 2,
+    "actor_id": "T-li",
+    "payload": {
+      "type": "EvidenceVerified",
+      "evidence_id": "EV-DRV-T1",
+      "milestone_id": "MS-D1",
+      "accepted": false,
+      "review_note": "数据真实但指标未达承诺，暂不具备拨款条件",
+      "reviewer_id": "T-li"
+    }
+  },
+  {
+    "event_id": "DRV-2026-011-E3",
+    "occurred_at": "2026-07-01T09:00:00+08:00",
+    "entity_id": "DRV-2026-011",
+    "version": 3,
+    "actor_id": "F-zhao",
+    "payload": {
+      "type": "MilestoneSuspended",
+      "scope": "DRV-2026-011",
+      "reason": "承担方核心团队变动，申请暂停6个月；非因试验失败否定项目",
+      "suspended_by": "F-zhao",
+      "disposal_obligations": [
+        {
+          "asset_or_fund": "高温老化测试箱（资产号 EQ-0917）",
+          "type": "equipment",
+          "action": "保管封存",
+          "deadline": "2026-10-31",
+          "responsible_id": "A-zhou"
+        },
+        {
+          "asset_or_fund": "未用拨付资金 460000 元",
+          "type": "unused_funds",
+          "action": "资金退回",
+          "deadline": "2026-09-30",
+          "responsible_id": "FN-sun"
+        }
+      ]
+    }
+  },
+  {
+    "event_id": "DRV-2026-011-E4",
+    "occurred_at": "2026-07-08T14:00:00+08:00",
+    "entity_id": "DRV-2026-011",
+    "version": 4,
+    "actor_id": "A-zhou",
+    "payload": {
+      "type": "DisposalObligationFulfilled",
+      "obligation_ref": "DRV-2026-011-OB1",
+      "asset_or_fund": "高温老化测试箱（资产号 EQ-0917）",
+      "action_taken": "测试箱断电封存于B3库房，贴封条并完成季度盘点",
+      "proof_ref": "s3://rd/drv011/seal-record-0917.pdf",
+      "fulfilled_by": "A-zhou"
     }
   }
 ]
