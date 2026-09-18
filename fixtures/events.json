@@ -1,0 +1,11 @@
+[
+  {
+    "event_id": "09182-018-E1",
+    "occurred_at": "2026-09-18T08:00:00+08:00",
+    "entity_id": "entity-018",
+    "version": 1,
+    "payload": {
+      "state": "已登记"
+    }
+  }
+]

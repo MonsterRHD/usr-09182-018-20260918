@@ -1,0 +1,20 @@
+{
+  "project": "创新项目里程碑拨付",
+  "source_context": [
+    "研发资助",
+    "里程碑",
+    "证据拨付"
+  ],
+  "event_contract": {
+    "event_id": "全局唯一字符串",
+    "occurred_at": "带时区时间",
+    "entity_id": "领域实体标识",
+    "version": "正整数",
+    "payload": "业务对象"
+  },
+  "invariants": [
+    "同一事件只能生效一次",
+    "更正不得覆盖原始事实",
+    "权限不足时不得返回敏感字段"
+  ]
+}
